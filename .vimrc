@@ -34,6 +34,11 @@ set smarttab
 set shiftwidth=2
 set tabstop=2
 
+" Show unwanted hidden characters and toggle with <leader>l
+set list
+set listchars=tab:↹\ ,trail:☠
+nmap <leader>l :set list!<CR>
+
 " Split behavior
 set splitbelow
 set splitright
@@ -167,6 +172,13 @@ command! Q :q
 nnoremap <leader>r :%s//
 vnoremap <leader>r "ry:%s/r/
 
+" CTRL-P
+nmap <leader>o :CtrlP<CR>
+let g:ctrlp_working_path_mode = 2
+set wildignore+=*/.git/*,*/.hg/*,*/.svn/*
+set wildignore+=*/.sass-cache/*,*/tmp/*,*/.tmp/*,*.so
+set wildignore+=*/vendor/*,*/coverage/*
+
 " =====================
 "    Snippet Support
 " =====================
@@ -182,3 +194,8 @@ endfunction
 function! CamelModelName()
   return Camelize(ModelName())
 endfunction
+
+autocmd User Rails Rnavcommand coffeescript        app/assets/javascripts            -glob=**/* -suffix=.coffee
+autocmd User Rails Rnavcommand feature             features                   -glob=**/* -suffix=.feature
+autocmd User Rails Rnavcommand factory             spec/factories             -glob=**/* -suffix=.rb
+
